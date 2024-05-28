@@ -98,6 +98,8 @@ export default function Countries() {
                     <input className="find-countries search-bar" type="text" value={searchQuery} onChange={handleSearchChange} placeholder="Search for a Country" />
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
+
+                <div className="filter">
                 <select className="find-countries region" value={selectedRegion} onChange={handleRegionChange} id="findcounties">
                     <option value="">Filter By Region</option>
                     {regions.map((region, index) => (
@@ -120,6 +122,7 @@ export default function Countries() {
                     <option value="asc">Ascending</option>
                     <option value="desc">Descending</option>
                 </select>
+                </div>
             </div>
             <div className="country-boxes">
                 {filteredData.length > 0 ? (
