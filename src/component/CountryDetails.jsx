@@ -8,7 +8,7 @@ export default function CountryDetails() {
 
   const [countryData, setCountryData] = useState(null);
   const navigate = useNavigate();
-  const { mode } = useContext(ThemeContext); // Use the theme context
+  const { mode } = useContext(ThemeContext); 
 
   useEffect(() => {
     const fetchData = async () => {
