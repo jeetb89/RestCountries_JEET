@@ -105,6 +105,7 @@ export default function Countries() {
                     <option value="asc">Ascending</option>
                     <option value="desc">Descending</option>
                 </select>
+                
             </div>
             <div className="country-boxes">
                 {filteredData.length > 0 ? (
