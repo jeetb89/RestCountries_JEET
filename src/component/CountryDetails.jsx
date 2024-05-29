@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ThemeContext from "./ThemeContext";
+import data from '../data/countries.json'
 
 export default function CountryDetails() {
   const { id } = useParams();
@@ -13,10 +14,11 @@ export default function CountryDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetch(url);
-        const data = await result.json();
-        if (data.length > 0) {
-          setCountryData(data[0]);
+        
+        const result= data.filter(country=> country.name.common===id);   
+   
+        if (result.length > 0) {
+          setCountryData(result[0]);
         } else {
           console.log("No country data found");
         }

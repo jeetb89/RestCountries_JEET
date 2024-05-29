@@ -6,7 +6,7 @@ export default  function Country({flag,name,population,region,capital}){
         <div className="card-content">
         <p><strong>{name}</strong></p>
         <div className="innercard-content">
-        <p><strong>Population:</strong> {population}</p>
+        <p><strong>Population:</strong> {population.toLocaleString()}</p>
         <p> <strong>Region:</strong> {region}</p>
         <p><strong>Capital:</strong> {capital}</p>   
          </div>

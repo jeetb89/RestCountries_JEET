@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Country from './Country';
 import Option from './Option';
 import ThemeContext from "./ThemeContext";
+import data from '../data/countries.json'
+
 
 const url = `https://restcountries.com/v3.1/all`;
 
@@ -21,8 +23,7 @@ export default function Countries() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await fetch(url);
-                const data = await result.json();
+               
                 setCountryData(data);
 
                 const uniqueRegions = [...new Set(data.map(item => item.region).filter(Boolean))];
