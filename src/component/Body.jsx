@@ -42,15 +42,15 @@ export default function Countries() {
         const selectedRegion = e.target.value;
         setSelectedRegion(selectedRegion);
 
-        // Filter subregions based on the selected region
+    
         if (selectedRegion) {
             const uniqueSubRegions = [...new Set(
                 countryData.filter(item => item.region === selectedRegion).map(item => item.subregion).filter(Boolean)
             )];
             setSubregions(uniqueSubRegions);
-            setSelectedSubRegion(""); // Reset subregion selection
+            setSelectedSubRegion(""); 
         } else {
-            // If no region is selected, show all subregions
+     
             const allSubRegions = [...new Set(data.map(item => item.subregion).filter(Boolean))];
             setSubregions(allSubRegions);
             setSelectedSubRegion("");
