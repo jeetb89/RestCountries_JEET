@@ -75,8 +75,8 @@ body.light {
 .body {
   background-color: var(--body-background);
   padding: 5%;
- 
-
+  height: 91vh;
+  overflow-y: auto;
 }
 
 .find {
@@ -140,7 +140,7 @@ body.light {
 .country-boxes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .country {
@@ -149,7 +149,7 @@ body.light {
   line-height: 1.8rem;
   overflow: hidden;
   border-radius: 2%;
-  margin-bottom: 10vh;
+  margin:3vh;
   color: var(--font-color);
   height:65vh;
 }

@@ -9,13 +9,6 @@ import CountryDetails from './component/CountryDetails.jsx'
  function App() {
 
   const [mode,setMode] = useState(false)
-  // console.log(mode)
-  // const styles = {
-  //   backgroundColor: mode?"#000000":"#FFFFFF"
-  // }
-  // function changeMode(){
-  //   setMode(prevMode => !prevMode);
-  // }
 
   return (
     <ThemeContext.Provider value={{mode,setMode}}>

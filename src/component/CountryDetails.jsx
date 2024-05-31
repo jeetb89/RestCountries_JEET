@@ -1,34 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ThemeContext from "./ThemeContext";
-import data from '../data/countries.json'
+import data from "../data/countries.json";
 
 export default function CountryDetails() {
   const { id } = useParams();
-  const url = `https://restcountries.com/v3.1/name/${id}?fullText=true`;
 
   const [countryData, setCountryData] = useState(null);
   const navigate = useNavigate();
-  const { mode } = useContext(ThemeContext); // Use the theme context
+  const { mode } = useContext(ThemeContext);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
-        
-        const result= data.filter(country=> country.name.common===id);   
-   
-        if (result.length > 0) {
+        setTimeout(() => {
+          const result = data.filter((country) => country.name.common === id);
           setCountryData(result[0]);
-        } else {
-          console.log("No country data found");
-        }
+        }, 1000);
       } catch (err) {
         console.log(err);
       }
     };
 
     fetchData();
-  }, [url]);
+  }, []);
 
   return (
     <div className={`country-details ${mode ? "dark" : "light"}`}>
@@ -38,11 +33,11 @@ export default function CountryDetails() {
       {countryData ? (
         <div className="content-container">
           <div className="country-flag">
-            {countryData.flags && countryData.flags.png ? (
-              <img className='flag' src={countryData.flags.png} alt={`${countryData.name.common} flag`} />
-            ) : (
-              <p>Loading flag...</p>
-            )}
+            <img
+              className="flag"
+              src={countryData.flags.png}
+              alt={`${countryData.name.common} flag`}
+            />
           </div>
 
           <div className="country-info">
@@ -52,56 +47,63 @@ export default function CountryDetails() {
               <div className="native">
                 <p>
                   <strong>Native Name:</strong>{" "}
-                  {countryData.name.nativeName ? (
-                    Object.values(countryData.name.nativeName).map((name, index) => (
-                      <span key={index}>{name.common}</span>
-                    ))
-                  ) : (
-                    "N/A"
+                  {Object.values(countryData.name.nativeName).map(
+                    (name, index) => (
+                      <span key={index}>{name.common} </span>
+                    )
                   )}
                 </p>
-                <p><strong>Population:</strong> {countryData.population.toLocaleString()}</p>
-                <p><strong>Region:</strong> {countryData.region}</p>
-                <p><strong>Subregion:</strong> {countryData.subregion}</p>
                 <p>
-                  <strong>Capital:</strong>{" "}
-                  {countryData.capital ? countryData.capital.join(", ") : "N/A"}
+                  <strong>Population:</strong>{" "}
+                  {countryData.population.toLocaleString()}
+                </p>
+                <p>
+                  <strong>Region:</strong> {countryData.region}
+                </p>
+                <p>
+                  <strong>Subregion:</strong> {countryData.subregion}
+                </p>
+                <p>
+                  <strong>Capital:</strong> {countryData.capital.join(", ")}
                 </p>
               </div>
               <div className="domain">
                 <p>
                   <strong>Top Level Domain:</strong>{" "}
-                  {countryData.tld ? countryData.tld.join(", ") : "N/A"}
+                  {countryData.tld.join(", ")}
                 </p>
                 <p>
                   <strong>Languages:</strong>{" "}
-                  {countryData.languages ? (
-                    Object.values(countryData.languages).join(", ")
-                  ) : (
-                    "N/A"
-                  )}
+                  {Object.values(countryData.languages).join(", ")}
                 </p>
                 <p>
                   <strong>Currencies:</strong>{" "}
-                  {countryData.currencies ? (
-                    Object.values(countryData.currencies).map((currency, index) => (
+                  {Object.values(countryData.currencies).map(
+                    (currency, index) => (
                       <span key={index}>{currency.name}</span>
-                    ))
-                  ) : (
-                    "N/A"
+                    )
                   )}
                 </p>
               </div>
             </div>
             <p className="border">
               <strong>Border Countries:</strong>{" "}
-              {countryData.borders ? (
-                countryData.borders.map((border) => (
-                  <button className="border-btn" key={border}>{border}</button>
-                ))
-              ) : (
-                "None"
-              )}
+              {countryData.borders
+                ? countryData.borders.map((border) => {
+                    const borderName = data.reduce((acc, curr) => {
+                      if (curr.cca3 === border) {
+                        acc = curr.name.common;
+                      }
+                      return acc;
+                    }, "");
+
+                    return (
+                      <button className="border-btn" key={border}>
+                        {borderName}
+                      </button>
+                    );
+                  })
+                : "None"}
             </p>
           </div>
         </div>
